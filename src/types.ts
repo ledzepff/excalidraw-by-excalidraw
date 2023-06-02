@@ -56,6 +56,21 @@ export type Collaborator = {
   id?: string;
 };
 
+export interface CollabProps {
+  collabServerUrl?: string;
+  collabDetails?: { roomId: string; roomKey: string };
+  excalidrawAPI: ExcalidrawImperativeAPI;
+  modalIsShown?: boolean;
+  useTestEnv?: boolean;
+}
+
+export interface ExcalidrawAppProps {
+  collabServerUrl?: string;
+  collabDetails?: { roomId: string; roomKey: string };
+  excalidraw: ExcalidrawProps;
+  getCollabAPI?: Function;
+}
+
 export type DataURL = string & { _brand: "DataURL" };
 
 export type BinaryFileData = {

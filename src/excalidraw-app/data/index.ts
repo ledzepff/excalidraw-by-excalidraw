@@ -63,13 +63,15 @@ const generateRoomId = async () => {
  *
  * If REACT_APP_WS_SERVER_URL env is set, we use that instead (useful for forks)
  */
-export const getCollabServer = async (): Promise<{
+export const getCollabServer = async (
+  collabServerUrl?: string,
+): Promise<{
   url: string;
   polling: boolean;
 }> => {
-  if (process.env.REACT_APP_WS_SERVER_URL) {
+  if (collabServerUrl) {
     return {
-      url: process.env.REACT_APP_WS_SERVER_URL,
+      url: collabServerUrl,
       polling: true,
     };
   }

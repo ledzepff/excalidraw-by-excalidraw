@@ -38,6 +38,12 @@ interface CanvasRenderingContext2D {
   ) => void;
 }
 
+type ResolutionType<T extends (...args: any) => any> = T extends (
+  ...args: any
+) => Promise<infer R>
+  ? R
+  : any;
+
 // https://github.com/facebook/create-react-app/blob/ddcb7d5/packages/react-scripts/lib/react-app.d.ts
 declare namespace NodeJS {
   interface ProcessEnv {

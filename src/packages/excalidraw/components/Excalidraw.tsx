@@ -1,29 +1,31 @@
 import React, { useEffect, forwardRef } from "react";
-import { InitializeApp } from "../../components/InitializeApp";
-import App from "../../components/App";
-import { isShallowEqual } from "../../utils";
 
-import "../../css/app.scss";
-import "../../css/styles.scss";
+import { InitializeApp } from "../../../components/InitializeApp";
+import App from "../../../components/App";
 
-import { AppProps, ExcalidrawAPIRefValue, ExcalidrawProps } from "../../types";
-import { defaultLang } from "../../i18n";
-import { DEFAULT_UI_OPTIONS } from "../../constants";
+import "../../../css/app.scss";
+import "../../../css/styles.scss";
+
+import {
+  AppProps,
+  ExcalidrawAPIRefValue,
+  ExcalidrawProps,
+} from "../../../types";
+import { defaultLang } from "../../../i18n";
+import { DEFAULT_UI_OPTIONS } from "../../../constants";
 import { Provider } from "jotai";
-import { jotaiScope, jotaiStore } from "../../jotai";
-import Footer from "../../components/footer/FooterCenter";
-import MainMenu from "../../components/main-menu/MainMenu";
-import WelcomeScreen from "../../components/welcome-screen/WelcomeScreen";
-import LiveCollaborationTrigger from "../../components/live-collaboration/LiveCollaborationTrigger";
+import { jotaiScope, jotaiStore } from "../../../jotai";
 
 const ExcalidrawBase = (props: ExcalidrawProps) => {
   const {
     onChange,
     initialData,
     excalidrawRef,
+    // fik@ onCollabButtonClick,
     isCollaborating = false,
     onPointerUpdate,
     renderTopRightUI,
+    // fik@ renderFooter,
     langCode = defaultLang.code,
     viewModeEnabled,
     zenModeEnabled,
@@ -41,13 +43,10 @@ const ExcalidrawBase = (props: ExcalidrawProps) => {
     onLinkOpen,
     onPointerDown,
     onScrollChange,
-    children,
   } = props;
 
   const canvasActions = props.UIOptions?.canvasActions;
 
-  // FIXME normalize/set defaults in parent component so that the memo resolver
-  // compares the same values
   const UIOptions: AppProps["UIOptions"] = {
     ...props.UIOptions,
     canvasActions: {
@@ -60,13 +59,6 @@ const ExcalidrawBase = (props: ExcalidrawProps) => {
     UIOptions.canvasActions.export.saveFileToDisk =
       canvasActions.export?.saveFileToDisk ??
       DEFAULT_UI_OPTIONS.canvasActions.export.saveFileToDisk;
-  }
-
-  if (
-    UIOptions.canvasActions.toggleTheme === null &&
-    typeof theme === "undefined"
-  ) {
-    UIOptions.canvasActions.toggleTheme = true;
   }
 
   useEffect(() => {
@@ -88,15 +80,17 @@ const ExcalidrawBase = (props: ExcalidrawProps) => {
   }, []);
 
   return (
-    <Provider unstable_createStore={() => jotaiStore} scope={jotaiScope}>
-      <InitializeApp langCode={langCode} theme={theme}>
+    <InitializeApp langCode={langCode}>
+      <Provider unstable_createStore={() => jotaiStore} scope={jotaiScope}>
         <App
           onChange={onChange}
           initialData={initialData}
           excalidrawRef={excalidrawRef}
+          // fik@ onCollabButtonClick={onCollabButtonClick}
           isCollaborating={isCollaborating}
           onPointerUpdate={onPointerUpdate}
           renderTopRightUI={renderTopRightUI}
+          // fik@ renderFooter={renderFooter}
           langCode={langCode}
           viewModeEnabled={viewModeEnabled}
           zenModeEnabled={zenModeEnabled}
@@ -115,11 +109,9 @@ const ExcalidrawBase = (props: ExcalidrawProps) => {
           onLinkOpen={onLinkOpen}
           onPointerDown={onPointerDown}
           onScrollChange={onScrollChange}
-        >
-          {children}
-        </App>
-      </InitializeApp>
-    </Provider>
+        />
+      </Provider>
+    </InitializeApp>
   );
 };
 
@@ -129,11 +121,6 @@ const areEqual = (
   prevProps: PublicExcalidrawProps,
   nextProps: PublicExcalidrawProps,
 ) => {
-  // short-circuit early
-  if (prevProps.children !== nextProps.children) {
-    return false;
-  }
-
   const {
     initialData: prevInitialData,
     UIOptions: prevUIOptions = {},
@@ -162,7 +149,7 @@ const areEqual = (
       const canvasOptionKeys = Object.keys(
         prevUIOptions.canvasActions!,
       ) as (keyof Partial<typeof DEFAULT_UI_OPTIONS.canvasActions>)[];
-      return canvasOptionKeys.every((key) => {
+      canvasOptionKeys.every((key) => {
         if (
           key === "export" &&
           prevUIOptions?.canvasActions?.export &&
@@ -179,10 +166,16 @@ const areEqual = (
         );
       });
     }
-    return prevUIOptions[key] === nextUIOptions[key];
+    return true;
   });
 
-  return isUIOptionsSame && isShallowEqual(prev, next);
+  const prevKeys = Object.keys(prevProps) as (keyof typeof prev)[];
+  const nextKeys = Object.keys(nextProps) as (keyof typeof next)[];
+  return (
+    isUIOptionsSame &&
+    prevKeys.length === nextKeys.length &&
+    prevKeys.every((key) => prev[key] === next[key])
+  );
 };
 
 const forwardedRefComp = forwardRef<
@@ -190,69 +183,5 @@ const forwardedRefComp = forwardRef<
   PublicExcalidrawProps
 >((props, ref) => <ExcalidrawBase {...props} excalidrawRef={ref} />);
 
-//export const Excalidraw = React.memo(forwardedRefComp, areEqual);
-//Excalidraw.displayName = "Excalidraw";
-
-export {
-  getSceneVersion,
-  isInvisiblySmallElement,
-  getNonDeletedElements,
-} from "../../element";
-export { defaultLang, useI18n, languages } from "../../i18n";
-export {
-  restore,
-  restoreAppState,
-  restoreElements,
-  restoreLibraryItems,
-} from "../../data/restore";
-export {
-  exportToCanvas,
-  exportToBlob,
-  exportToSvg,
-  serializeAsJSON,
-  serializeLibraryAsJSON,
-  loadLibraryFromBlob,
-  loadFromBlob,
-  loadSceneOrLibraryFromBlob,
-  getFreeDrawSvgPath,
-  exportToClipboard,
-  mergeLibraryItems,
-} from "../../packages/utils";
-export { isLinearElement } from "../../element/typeChecks";
-
-export { FONT_FAMILY, THEME, MIME_TYPES } from "../../constants";
-
-export {
-  mutateElement,
-  newElementWith,
-  bumpVersion,
-} from "../../element/mutateElement";
-
-export {
-  parseLibraryTokensFromUrl,
-  useHandleLibrary,
-} from "../../data/library";
-
-export {
-  sceneCoordsToViewportCoords,
-  viewportCoordsToSceneCoords,
-} from "../../utils";
-
-export { Sidebar } from "../../components/Sidebar/Sidebar";
-export { Button } from "../../components/Button";
-export { Footer };
-export { MainMenu };
-export { useDevice } from "../../components/App";
-export { WelcomeScreen };
-export { LiveCollaborationTrigger };
-
-export { DefaultSidebar } from "../../components/DefaultSidebar";
-
-// added from jitsi
-
-export type { ExcalidrawElement } from "../../element/types";
-export * from "../../types";
-
-export { generateCollaborationLinkData } from "../../excalidraw-app/data";
-
-export { Collab, Excalidraw, ExcalidrawApp } from "./components";
+export const Excalidraw = React.memo(forwardedRefComp, areEqual);
+Excalidraw.displayName = "Excalidraw";
