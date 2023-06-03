@@ -152,12 +152,12 @@ const areEqual = (
       canvasOptionKeys.every((key) => {
         if (
           key === "hideExportMenuItem" &&
-          prevUIOptions?.canvasActions?.export &&
-          nextUIOptions?.canvasActions?.export
+          prevUIOptions?.canvasActions?.hideExportMenuItem &&
+          nextUIOptions?.canvasActions?.hideExportMenuItem
         ) {
           return (
-            prevUIOptions.canvasActions.export.saveFileToDisk ===
-            nextUIOptions.canvasActions.export.saveFileToDisk
+            prevUIOptions.canvasActions.hideExportMenuItem.saveFileToDisk ===
+            nextUIOptions.canvasActions.hideExportMenuItem.saveFileToDisk
           );
         }
         return (
