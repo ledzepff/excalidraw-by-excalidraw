@@ -51,7 +51,7 @@ export class API {
     return selectedElements[0];
   };
 
-  static getStateHistory = () => {
+  static getStateHistory2 = () => {
     // @ts-ignore
     return h.history.stateHistory;
   };

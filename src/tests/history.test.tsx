@@ -49,14 +49,14 @@ describe("history", () => {
       expect.objectContaining({ id: "A", isDeleted: false }),
       expect.objectContaining({ id: rectangle.id, isDeleted: true }),
     ]);
-    expect(API.getStateHistory().length).toBe(1);
+    expect(API.getStateHistory2().length).toBe(1);
 
     h.app.actionManager.executeAction(redoAction);
     expect(h.elements).toEqual([
       expect.objectContaining({ id: "A", isDeleted: false }),
       expect.objectContaining({ id: rectangle.id, isDeleted: false }),
     ]);
-    expect(API.getStateHistory().length).toBe(2);
+    expect(API.getStateHistory2().length).toBe(2);
   });
 
   it("scene import via drag&drop should create new history entry", async () => {
@@ -90,7 +90,7 @@ describe("history", () => {
       ),
     );
 
-    await waitFor(() => expect(API.getStateHistory().length).toBe(2));
+    await waitFor(() => expect(API.getStateHistory2().length).toBe(2));
     expect(h.state.viewBackgroundColor).toBe("#000");
     expect(h.elements).toEqual([
       expect.objectContaining({ id: "B", isDeleted: false }),

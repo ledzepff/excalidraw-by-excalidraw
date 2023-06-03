@@ -372,7 +372,7 @@ describe("regression tests", () => {
   });
 
   it("noop interaction after undo shouldn't create history entry", () => {
-    expect(API.getStateHistory().length).toBe(1);
+    expect(API.getStateHistory2().length).toBe(1);
 
     UI.clickTool("rectangle");
     mouse.down(10, 10);
@@ -386,35 +386,35 @@ describe("regression tests", () => {
 
     const secondElementEndPoint = mouse.getPosition();
 
-    expect(API.getStateHistory().length).toBe(3);
+    expect(API.getStateHistory2().length).toBe(3);
 
     Keyboard.withModifierKeys({ ctrl: true }, () => {
       Keyboard.keyPress(KEYS.Z);
     });
 
-    expect(API.getStateHistory().length).toBe(2);
+    expect(API.getStateHistory2().length).toBe(2);
 
     // clicking an element shouldn't add to history
     mouse.restorePosition(...firstElementEndPoint);
     mouse.click();
-    expect(API.getStateHistory().length).toBe(2);
+    expect(API.getStateHistory2().length).toBe(2);
 
     Keyboard.withModifierKeys({ shift: true, ctrl: true }, () => {
       Keyboard.keyPress(KEYS.Z);
     });
 
-    expect(API.getStateHistory().length).toBe(3);
+    expect(API.getStateHistory2().length).toBe(3);
 
     // clicking an element shouldn't add to history
     mouse.click();
-    expect(API.getStateHistory().length).toBe(3);
+    expect(API.getStateHistory2().length).toBe(3);
 
     const firstSelectedElementId = API.getSelectedElement().id;
 
     // same for clicking the element just redo-ed
     mouse.restorePosition(...secondElementEndPoint);
     mouse.click();
-    expect(API.getStateHistory().length).toBe(3);
+    expect(API.getStateHistory2().length).toBe(3);
 
     expect(API.getSelectedElement().id).not.toEqual(firstSelectedElementId);
   });
