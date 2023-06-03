@@ -20,12 +20,17 @@ import { Point } from "../../types";
 import { getSelectedElements } from "../../scene/selection";
 import { isLinearElementType } from "../../element/typeChecks";
 import { Mutable } from "../../utility-types";
+import History from "../../history";
 
 const readFile = util.promisify(fs.readFile);
 
 const { h } = window;
 
 export class API {
+  constructor() {
+    h.history = new History();
+  }
+
   static setSelectedElements = (elements: ExcalidrawElement[]) => {
     h.setState({
       selectedElementIds: elements.reduce((acc, element) => {

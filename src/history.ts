@@ -9,12 +9,12 @@ export interface HistoryEntry {
   elements: ExcalidrawElement[];
 }
 
-interface DehydratedExcalidrawElement {
+export interface DehydratedExcalidrawElement {
   id: string;
   versionNonce: number;
 }
 
-interface DehydratedHistoryEntry {
+export interface DehydratedHistoryEntry {
   appState: string;
   elements: DehydratedExcalidrawElement[];
 }
