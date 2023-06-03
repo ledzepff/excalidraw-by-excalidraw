@@ -20,6 +20,7 @@ import { Point } from "../../types";
 import { getSelectedElements } from "../../scene/selection";
 import { isLinearElementType } from "../../element/typeChecks";
 import { Mutable } from "../../utility-types";
+import { history } from "../../history";
 
 const { h } = window;
 
@@ -52,9 +53,9 @@ export class API {
   };
 
   static getStateHistory = () => {
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    return history.getStateHistory();
     // @ts-ignore
-    return h.history.stateHistory;
+    // return h.history.stateHistory;
   };
 
   static clearSelection = () => {

@@ -37,6 +37,10 @@ class History {
   private redoStack: DehydratedHistoryEntry[] = [];
   private lastEntry: HistoryEntry | null = null;
 
+  public getStateHistory() {
+    return this.stateHistory;
+  }
+
   private hydrateHistoryEntry({
     appState,
     elements,
@@ -263,3 +267,6 @@ class History {
 }
 
 export default History;
+
+const historyInstance = new History();
+export const history = historyInstance;
