@@ -20,11 +20,10 @@ import { Point } from "../../types";
 import { getSelectedElements } from "../../scene/selection";
 import { isLinearElementType } from "../../element/typeChecks";
 import { Mutable } from "../../utility-types";
-import { history } from "../../history";
-
-const { h } = window;
 
 const readFile = util.promisify(fs.readFile);
+
+const { h } = window;
 
 export class API {
   static setSelectedElements = (elements: ExcalidrawElement[]) => {
