@@ -134,7 +134,7 @@ export const actionSaveToActiveFile = register({
   trackEvent: { category: "export" },
   predicate: (elements, appState, props, app) => {
     return (
-      !!app.props.UIOptions.canvasActions.saveToActiveFile &&
+      !!app.props.UIOptions.canvasActions.hideSaveToActiveFileMenuItem &&
       !!appState.fileHandle &&
       !appState.viewModeEnabled
     );

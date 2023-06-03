@@ -26,7 +26,7 @@ export const actionChangeViewBackgroundColor = register({
   trackEvent: false,
   predicate: (elements, appState, props, app) => {
     return (
-      !!app.props.UIOptions.canvasActions.changeViewBackgroundColor &&
+      !!app.props.UIOptions.canvasActions.hideChangeViewBackgroundColorMenuItem &&
       !appState.viewModeEnabled
     );
   },
@@ -60,7 +60,7 @@ export const actionClearCanvas = register({
   trackEvent: { category: "canvas" },
   predicate: (elements, appState, props, app) => {
     return (
-      !!app.props.UIOptions.canvasActions.clearCanvas &&
+      !!app.props.UIOptions.canvasActions.hideClearCanvasMenuItem &&
       !appState.viewModeEnabled
     );
   },
@@ -303,7 +303,7 @@ export const actionToggleTheme = register({
   },
   keyTest: (event) => event.altKey && event.shiftKey && event.code === CODES.D,
   predicate: (elements, appState, props, app) => {
-    return !!app.props.UIOptions.canvasActions.toggleTheme;
+    return !!app.props.UIOptions.canvasActions.hideToggleThemeMenuItem;
   },
 });
 

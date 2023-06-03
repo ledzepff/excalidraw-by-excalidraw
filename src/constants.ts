@@ -174,15 +174,16 @@ export const URL_HASH_KEYS = {
 
 export const DEFAULT_UI_OPTIONS: AppProps["UIOptions"] = {
   canvasActions: {
-    changeViewBackgroundColor: true,
-    clearCanvas: true,
-    export: { saveFileToDisk: true },
+    hideChangeViewBackgroundColorMenuItem: true,
+    hideClearCanvasMenuItem: true,
+    hideExportMenuItem: { saveFileToDisk: true },
     loadScene: true,
-    saveToActiveFile: true,
-    toggleTheme: false,
-    saveAsImage: true,
-    hideOpenDialog: false,
-    hideHelpDialog: false,
+    hideSaveToActiveFileMenuItem: true,
+    hideToggleThemeMenuItem: false,
+    hideSaveAsImageMenuItem: true,
+    hideLoanSceneMenuItem: false,
+    hideHelpMenuItem: false,
+    hideExcalidrawLinksMenuItem: false,
   },
 };
 

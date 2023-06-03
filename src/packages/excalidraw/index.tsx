@@ -56,17 +56,17 @@ const ExcalidrawBase = (props: ExcalidrawProps) => {
     },
   };
 
-  if (canvasActions?.export) {
-    UIOptions.canvasActions.export.saveFileToDisk =
-      canvasActions.export?.saveFileToDisk ??
-      DEFAULT_UI_OPTIONS.canvasActions.export.saveFileToDisk;
+  if (canvasActions?.hideExportMenuItem) {
+    UIOptions.canvasActions.hideExportMenuItem.saveFileToDisk =
+      canvasActions.hideExportMenuItem?.saveFileToDisk ??
+      DEFAULT_UI_OPTIONS.canvasActions.hideExportMenuItem.saveFileToDisk;
   }
 
   if (
-    UIOptions.canvasActions.toggleTheme === null &&
+    UIOptions.canvasActions.hideToggleThemeMenuItem === null &&
     typeof theme === "undefined"
   ) {
-    UIOptions.canvasActions.toggleTheme = true;
+    UIOptions.canvasActions.hideToggleThemeMenuItem = true;
   }
 
   useEffect(() => {
@@ -164,7 +164,7 @@ const areEqual = (
       ) as (keyof Partial<typeof DEFAULT_UI_OPTIONS.canvasActions>)[];
       return canvasOptionKeys.every((key) => {
         if (
-          key === "export" &&
+          key === "hideExportMenuItem" &&
           prevUIOptions?.canvasActions?.export &&
           nextUIOptions?.canvasActions?.export
         ) {
