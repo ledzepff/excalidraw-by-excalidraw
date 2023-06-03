@@ -179,8 +179,10 @@ export const DEFAULT_UI_OPTIONS: AppProps["UIOptions"] = {
     export: { saveFileToDisk: true },
     loadScene: true,
     saveToActiveFile: true,
-    toggleTheme: null,
+    toggleTheme: false,
     saveAsImage: true,
+    hideOpenDialog: false,
+    hideHelpDialog: false,
   },
 };
 
