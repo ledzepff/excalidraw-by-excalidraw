@@ -408,6 +408,8 @@ type CanvasActions = Partial<{
   saveToActiveFile: boolean;
   toggleTheme: boolean | null;
   saveAsImage: boolean;
+  hideOpenDialog: boolean;
+  hideHelpDialog: boolean;
 }>;
 
 type UIOptions = Partial<{

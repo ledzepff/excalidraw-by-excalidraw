@@ -50,6 +50,7 @@ import { DefaultSidebar } from "./DefaultSidebar";
 
 import "./LayerUI.scss";
 import "./Toolbar.scss";
+import {UI} from "../tests/helpers/ui";
 
 interface LayerUIProps {
   actionManager: ActionManager;
@@ -77,7 +78,9 @@ const DefaultMainMenu: React.FC<{
 }> = ({ UIOptions }) => {
   return (
     <MainMenu __fallback>
-      <MainMenu.DefaultItems.LoadScene />
+      {!UIOptions.canvasActions.hideOpenDialog && (
+        <MainMenu.DefaultItems.LoadScene />
+      )}
       <MainMenu.DefaultItems.SaveToActiveFile />
       {/* FIXME we should to test for this inside the item itself */}
       {UIOptions.canvasActions.export && <MainMenu.DefaultItems.Export />}
@@ -85,7 +88,9 @@ const DefaultMainMenu: React.FC<{
       {UIOptions.canvasActions.saveAsImage && (
         <MainMenu.DefaultItems.SaveAsImage />
       )}
-      <MainMenu.DefaultItems.Help />
+      {!UIOptions.canvasActions.hideOpenDialog && (
+        <MainMenu.DefaultItems.Help />
+      )}
       <MainMenu.DefaultItems.ClearCanvas />
       <MainMenu.Separator />
       <MainMenu.Group title="Excalidraw links">
