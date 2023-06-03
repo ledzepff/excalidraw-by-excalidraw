@@ -85,17 +85,17 @@ const DefaultMainMenu: React.FC<{
         <MainMenu.DefaultItems.SaveToActiveFile />
       )}
       {/* FIXME we should to test for this inside the item itself */}
-      {UIOptions.canvasActions.hideExportMenuItem && (
+      {!UIOptions.canvasActions.hideExportMenuItem && (
         <MainMenu.DefaultItems.Export />
       )}
       {/* FIXME we should to test for this inside the item itself */}
-      {UIOptions.canvasActions.hideSaveAsImageMenuItem && (
+      {!UIOptions.canvasActions.hideSaveAsImageMenuItem && (
         <MainMenu.DefaultItems.SaveAsImage />
       )}
       {!UIOptions.canvasActions.hideHelpMenuItem && (
         <MainMenu.DefaultItems.Help />
       )}
-      {UIOptions.canvasActions.hideClearCanvasMenuItem && (
+      {!UIOptions.canvasActions.hideClearCanvasMenuItem && (
         <MainMenu.DefaultItems.ClearCanvas />
       )}
       <MainMenu.Separator />
@@ -105,10 +105,10 @@ const DefaultMainMenu: React.FC<{
         </MainMenu.Group>
       )}
       <MainMenu.Separator />
-      {UIOptions.canvasActions.hideToggleThemeMenuItem && (
+      {!UIOptions.canvasActions.hideToggleThemeMenuItem && (
         <MainMenu.DefaultItems.ToggleTheme />
       )}
-      {UIOptions.canvasActions.hideChangeViewBackgroundColorMenuItem && (
+      {!UIOptions.canvasActions.hideChangeViewBackgroundColorMenuItem && (
         <MainMenu.DefaultItems.ChangeCanvasBackground />
       )}
     </MainMenu>
