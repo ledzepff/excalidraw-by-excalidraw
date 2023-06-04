@@ -405,7 +405,7 @@ type CanvasActions = Partial<{
   hideClearCanvasMenuItem: boolean;
   hideExportMenuItem: false | ExportOpts;
   loadScene: boolean;
-  hideSaveToActiveFileMenuItem: boolean;
+  showSaveToActiveFileMenuItem: boolean;
   hideToggleThemeMenuItem: boolean | null;
   hideSaveAsImageMenuItem: boolean;
   hideLoanSceneMenuItem: boolean;

@@ -178,7 +178,7 @@ export const DEFAULT_UI_OPTIONS: AppProps["UIOptions"] = {
     hideClearCanvasMenuItem: true,
     hideExportMenuItem: { saveFileToDisk: true },
     loadScene: true,
-    hideSaveToActiveFileMenuItem: true,
+    showSaveToActiveFileMenuItem: true,
     hideToggleThemeMenuItem: false,
     hideSaveAsImageMenuItem: true,
     hideLoanSceneMenuItem: false,

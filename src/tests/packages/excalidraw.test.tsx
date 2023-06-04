@@ -192,7 +192,7 @@ describe("<Excalidraw/>", () => {
         const { container } = await render(
           <Excalidraw
             UIOptions={{
-              canvasActions: { hideSaveToActiveFileMenuItem: false },
+              canvasActions: { showSaveToActiveFileMenuItem: false },
             }}
           />,
         );

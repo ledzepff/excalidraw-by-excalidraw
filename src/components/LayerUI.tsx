@@ -81,7 +81,7 @@ const DefaultMainMenu: React.FC<{
       {!UIOptions.canvasActions.hideLoanSceneMenuItem && (
         <MainMenu.DefaultItems.LoadScene />
       )}
-      {!UIOptions.canvasActions.hideSaveToActiveFileMenuItem && (
+      {UIOptions.canvasActions.showSaveToActiveFileMenuItem && (
         <MainMenu.DefaultItems.SaveToActiveFile />
       )}
       {/* FIXME we should to test for this inside the item itself */}
