@@ -137,7 +137,7 @@ describe("<Excalidraw/>", () => {
       it("should hide clear canvas button when clearCanvas is false", async () => {
         const { container } = await render(
           <Excalidraw
-            UIOptions={{ canvasActions: { hideClearCanvasMenuItem: false } }}
+            UIOptions={{ canvasActions: { showClearCanvasMenuItem: false } }}
           />,
         );
         //open menu
@@ -148,7 +148,7 @@ describe("<Excalidraw/>", () => {
       it("should hide export button when export is false", async () => {
         const { container } = await render(
           <Excalidraw
-            UIOptions={{ canvasActions: { hideExportMenuItem: false } }}
+            UIOptions={{ canvasActions: { showExportMenuItem: false } }}
           />,
         );
         //open menu
@@ -159,7 +159,7 @@ describe("<Excalidraw/>", () => {
       it("should hide 'Save as image' button when 'saveAsImage' is false", async () => {
         const { container } = await render(
           <Excalidraw
-            UIOptions={{ canvasActions: { hideSaveAsImageMenuItem: false } }}
+            UIOptions={{ canvasActions: { showSaveAsImageMenuItem: false } }}
           />,
         );
         //open menu
@@ -179,7 +179,7 @@ describe("<Excalidraw/>", () => {
         const { container } = await render(
           <Excalidraw
             UIOptions={{
-              canvasActions: { hideExportMenuItem: { saveFileToDisk: false } },
+              canvasActions: { showExportMenuItem: { saveFileToDisk: false } },
             }}
           />,
         );
@@ -205,7 +205,7 @@ describe("<Excalidraw/>", () => {
         const { container } = await render(
           <Excalidraw
             UIOptions={{
-              canvasActions: { hideChangeViewBackgroundColorMenuItem: false },
+              canvasActions: { showChangeViewBackgroundColorMenuItem: false },
             }}
           />,
         );
@@ -217,7 +217,7 @@ describe("<Excalidraw/>", () => {
       it("should hide the theme toggle when theme is false", async () => {
         const { container } = await render(
           <Excalidraw
-            UIOptions={{ canvasActions: { hideToggleThemeMenuItem: false } }}
+            UIOptions={{ canvasActions: { showToggleThemeMenuItem: false } }}
           />,
         );
         //open menu
@@ -272,7 +272,7 @@ describe("<Excalidraw/>", () => {
       const { container } = await render(
         <Excalidraw
           theme={THEME.DARK}
-          UIOptions={{ canvasActions: { hideToggleThemeMenuItem: true } }}
+          UIOptions={{ canvasActions: { showToggleThemeMenuItem: true } }}
         />,
       );
       expect(h.state.theme).toBe(THEME.DARK);
@@ -285,7 +285,7 @@ describe("<Excalidraw/>", () => {
     it("should not show theme toggle when `UIOptions.canvasActions.toggleTheme` is false", async () => {
       const { container } = await render(
         <Excalidraw
-          UIOptions={{ canvasActions: { hideToggleThemeMenuItem: false } }}
+          UIOptions={{ canvasActions: { showToggleThemeMenuItem: false } }}
           theme={THEME.DARK}
         />,
       );

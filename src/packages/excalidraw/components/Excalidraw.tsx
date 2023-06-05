@@ -55,10 +55,10 @@ const ExcalidrawBase = (props: ExcalidrawProps) => {
     },
   };
 
-  if (canvasActions?.hideExportMenuItem) {
-    UIOptions.canvasActions.hideExportMenuItem.saveFileToDisk =
-      canvasActions.hideExportMenuItem?.saveFileToDisk ??
-      DEFAULT_UI_OPTIONS.canvasActions.hideExportMenuItem.saveFileToDisk;
+  if (canvasActions?.showExportMenuItem) {
+    UIOptions.canvasActions.showExportMenuItem.saveFileToDisk =
+      canvasActions.showExportMenuItem?.saveFileToDisk ??
+      DEFAULT_UI_OPTIONS.canvasActions.showExportMenuItem.saveFileToDisk;
   }
 
   useEffect(() => {
@@ -151,13 +151,13 @@ const areEqual = (
       ) as (keyof Partial<typeof DEFAULT_UI_OPTIONS.canvasActions>)[];
       canvasOptionKeys.every((key) => {
         if (
-          key === "hideExportMenuItem" &&
-          prevUIOptions?.canvasActions?.hideExportMenuItem &&
-          nextUIOptions?.canvasActions?.hideExportMenuItem
+          key === "showExportMenuItem" &&
+          prevUIOptions?.canvasActions?.showExportMenuItem &&
+          nextUIOptions?.canvasActions?.showExportMenuItem
         ) {
           return (
-            prevUIOptions.canvasActions.hideExportMenuItem.saveFileToDisk ===
-            nextUIOptions.canvasActions.hideExportMenuItem.saveFileToDisk
+            prevUIOptions.canvasActions.showExportMenuItem.saveFileToDisk ===
+            nextUIOptions.canvasActions.showExportMenuItem.saveFileToDisk
           );
         }
         return (

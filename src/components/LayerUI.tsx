@@ -50,7 +50,6 @@ import { DefaultSidebar } from "./DefaultSidebar";
 
 import "./LayerUI.scss";
 import "./Toolbar.scss";
-import { UI } from "../tests/helpers/ui";
 
 interface LayerUIProps {
   actionManager: ActionManager;
@@ -78,37 +77,37 @@ const DefaultMainMenu: React.FC<{
 }> = ({ UIOptions }) => {
   return (
     <MainMenu __fallback>
-      {!UIOptions.canvasActions.hideLoanSceneMenuItem && (
+      {UIOptions.canvasActions.showLoadSceneMenuItem && (
         <MainMenu.DefaultItems.LoadScene />
       )}
       {UIOptions.canvasActions.showSaveToActiveFileMenuItem && (
         <MainMenu.DefaultItems.SaveToActiveFile />
       )}
       {/* FIXME we should to test for this inside the item itself */}
-      {!UIOptions.canvasActions.hideExportMenuItem && (
+      {UIOptions.canvasActions.showExportMenuItem && (
         <MainMenu.DefaultItems.Export />
       )}
       {/* FIXME we should to test for this inside the item itself */}
-      {!UIOptions.canvasActions.hideSaveAsImageMenuItem && (
+      {UIOptions.canvasActions.showSaveAsImageMenuItem && (
         <MainMenu.DefaultItems.SaveAsImage />
       )}
-      {!UIOptions.canvasActions.hideHelpMenuItem && (
+      {UIOptions.canvasActions.showHelpMenuItem && (
         <MainMenu.DefaultItems.Help />
       )}
-      {!UIOptions.canvasActions.hideClearCanvasMenuItem && (
+      {!UIOptions.canvasActions.showClearCanvasMenuItem && (
         <MainMenu.DefaultItems.ClearCanvas />
       )}
       <MainMenu.Separator />
-      {!UIOptions.canvasActions.hideExcalidrawLinksMenuItem && (
+      {UIOptions.canvasActions.showExcalidrawLinksMenuItem && (
         <MainMenu.Group title="Excalidraw links">
           <MainMenu.DefaultItems.Socials />
         </MainMenu.Group>
       )}
       <MainMenu.Separator />
-      {!UIOptions.canvasActions.hideToggleThemeMenuItem && (
+      {UIOptions.canvasActions.showToggleThemeMenuItem && (
         <MainMenu.DefaultItems.ToggleTheme />
       )}
-      {!UIOptions.canvasActions.hideChangeViewBackgroundColorMenuItem && (
+      {UIOptions.canvasActions.showChangeViewBackgroundColorMenuItem && (
         <MainMenu.DefaultItems.ChangeCanvasBackground />
       )}
     </MainMenu>
@@ -138,7 +137,7 @@ const LayerUI = ({
   const tunnels = useInitializeTunnels();
 
   const renderJSONExportDialog = () => {
-    if (!UIOptions.canvasActions.hideExportMenuItem) {
+    if (!UIOptions.canvasActions.showExportMenuItem) {
       return null;
     }
 
@@ -148,7 +147,7 @@ const LayerUI = ({
         appState={appState}
         files={files}
         actionManager={actionManager}
-        exportOpts={UIOptions.canvasActions.hideExportMenuItem}
+        exportOpts={UIOptions.canvasActions.showExportMenuItem}
         canvas={canvas}
         setAppState={setAppState}
       />
@@ -156,7 +155,7 @@ const LayerUI = ({
   };
 
   const renderImageExportDialog = () => {
-    if (!UIOptions.canvasActions.hideSaveAsImageMenuItem) {
+    if (!UIOptions.canvasActions.showSaveAsImageMenuItem) {
       return null;
     }
 

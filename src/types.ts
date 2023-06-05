@@ -401,16 +401,16 @@ export type ExportOpts = {
 // (see manager renderAction). We also override canvasAction values in
 // excalidraw package index.tsx.
 type CanvasActions = Partial<{
-  hideChangeViewBackgroundColorMenuItem: boolean;
-  hideClearCanvasMenuItem: boolean;
-  hideExportMenuItem: false | ExportOpts;
+  showChangeViewBackgroundColorMenuItem: boolean;
+  showClearCanvasMenuItem: boolean;
+  showExportMenuItem: false | ExportOpts;
   loadScene: boolean;
   showSaveToActiveFileMenuItem: boolean;
-  hideToggleThemeMenuItem: boolean | null;
-  hideSaveAsImageMenuItem: boolean;
-  hideLoanSceneMenuItem: boolean;
-  hideHelpMenuItem: boolean;
-  hideExcalidrawLinksMenuItem: boolean;
+  showToggleThemeMenuItem: boolean | null;
+  showSaveAsImageMenuItem: boolean;
+  showLoadSceneMenuItem: boolean;
+  showHelpMenuItem: boolean;
+  showExcalidrawLinksMenuItem: boolean;
 }>;
 
 type UIOptions = Partial<{
@@ -427,7 +427,7 @@ export type AppProps = Merge<
       UIOptions,
       {
         canvasActions: Required<CanvasActions> & {
-          hideExportMenuItem: ExportOpts;
+          showExportMenuItem: ExportOpts;
         };
       }
     >;
