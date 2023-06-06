@@ -55,10 +55,10 @@ const ExcalidrawBase = (props: ExcalidrawProps) => {
     },
   };
 
-  if (canvasActions?.showExportMenuItem) {
-    UIOptions.canvasActions.showExportMenuItem.saveFileToDisk =
-      canvasActions.showExportMenuItem?.saveFileToDisk ??
-      DEFAULT_UI_OPTIONS.canvasActions.showExportMenuItem.saveFileToDisk;
+  if (canvasActions?.exportOptions) {
+    UIOptions.canvasActions.exportOptions.saveFileToDisk =
+      canvasActions.exportOptions?.saveFileToDisk ??
+      DEFAULT_UI_OPTIONS.canvasActions.exportOptions.saveFileToDisk;
   }
 
   useEffect(() => {
@@ -151,13 +151,13 @@ const areEqual = (
       ) as (keyof Partial<typeof DEFAULT_UI_OPTIONS.canvasActions>)[];
       canvasOptionKeys.every((key) => {
         if (
-          key === "showExportMenuItem" &&
-          prevUIOptions?.canvasActions?.showExportMenuItem &&
-          nextUIOptions?.canvasActions?.showExportMenuItem
+          key === "exportOptions" &&
+          prevUIOptions?.canvasActions?.exportOptions &&
+          nextUIOptions?.canvasActions?.exportOptions
         ) {
           return (
-            prevUIOptions.canvasActions.showExportMenuItem.saveFileToDisk ===
-            nextUIOptions.canvasActions.showExportMenuItem.saveFileToDisk
+            prevUIOptions.canvasActions.exportOptions.saveFileToDisk ===
+            nextUIOptions.canvasActions.exportOptions.saveFileToDisk
           );
         }
         return (

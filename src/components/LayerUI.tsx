@@ -77,37 +77,35 @@ const DefaultMainMenu: React.FC<{
 }> = ({ UIOptions }) => {
   return (
     <MainMenu __fallback>
-      {UIOptions.canvasActions.showLoadSceneMenuItem && (
+      {UIOptions.canvasActions.showLoadScene && (
         <MainMenu.DefaultItems.LoadScene />
       )}
-      {UIOptions.canvasActions.showSaveToActiveFileMenuItem && (
+      {UIOptions.canvasActions.showSaveSceneTo && (
         <MainMenu.DefaultItems.SaveToActiveFile />
       )}
       {/* FIXME we should to test for this inside the item itself */}
-      {UIOptions.canvasActions.showExportMenuItem && (
+      {UIOptions.canvasActions.exportOptions && (
         <MainMenu.DefaultItems.Export />
       )}
       {/* FIXME we should to test for this inside the item itself */}
-      {UIOptions.canvasActions.showSaveAsImageMenuItem && (
+      {UIOptions.canvasActions.showExportAsImage && (
         <MainMenu.DefaultItems.SaveAsImage />
       )}
-      {UIOptions.canvasActions.showHelpMenuItem && (
-        <MainMenu.DefaultItems.Help />
-      )}
-      {!UIOptions.canvasActions.showClearCanvasMenuItem && (
+      {UIOptions.canvasActions.showHelp && <MainMenu.DefaultItems.Help />}
+      {!UIOptions.canvasActions.showClearCanvas && (
         <MainMenu.DefaultItems.ClearCanvas />
       )}
-      <MainMenu.Separator />
-      {UIOptions.canvasActions.showExcalidrawLinksMenuItem && (
+      {UIOptions.canvasActions.showExcalidrawLinks && <MainMenu.Separator />}
+      {UIOptions.canvasActions.showExcalidrawLinks && (
         <MainMenu.Group title="Excalidraw links">
           <MainMenu.DefaultItems.Socials />
         </MainMenu.Group>
       )}
-      <MainMenu.Separator />
-      {UIOptions.canvasActions.showToggleThemeMenuItem && (
+      {UIOptions.canvasActions.showToggleTheme && <MainMenu.Separator />}
+      {UIOptions.canvasActions.showToggleTheme && (
         <MainMenu.DefaultItems.ToggleTheme />
       )}
-      {UIOptions.canvasActions.showChangeViewBackgroundColorMenuItem && (
+      {UIOptions.canvasActions.showChangeViewBackgroundColors && (
         <MainMenu.DefaultItems.ChangeCanvasBackground />
       )}
     </MainMenu>
@@ -137,7 +135,7 @@ const LayerUI = ({
   const tunnels = useInitializeTunnels();
 
   const renderJSONExportDialog = () => {
-    if (!UIOptions.canvasActions.showExportMenuItem) {
+    if (!UIOptions.canvasActions.exportOptions) {
       return null;
     }
 
@@ -147,7 +145,7 @@ const LayerUI = ({
         appState={appState}
         files={files}
         actionManager={actionManager}
-        exportOpts={UIOptions.canvasActions.showExportMenuItem}
+        exportOpts={UIOptions.canvasActions.exportOptions}
         canvas={canvas}
         setAppState={setAppState}
       />
@@ -155,7 +153,7 @@ const LayerUI = ({
   };
 
   const renderImageExportDialog = () => {
-    if (!UIOptions.canvasActions.showSaveAsImageMenuItem) {
+    if (!UIOptions.canvasActions.showExportAsImage) {
       return null;
     }
 
@@ -341,23 +339,25 @@ const LayerUI = ({
           tunneled away. We only render tunneled components that actually
         have defaults when host do not render anything. */}
       <DefaultMainMenu UIOptions={UIOptions} />
-      <DefaultSidebar.Trigger
-        __fallback
-        icon={LibraryIcon}
-        title={capitalizeString(t("toolBar.library"))}
-        onToggle={(open) => {
-          if (open) {
-            trackEvent(
-              "sidebar",
-              `${DEFAULT_SIDEBAR.name} (open)`,
-              `button (${device.isMobile ? "mobile" : "desktop"})`,
-            );
-          }
-        }}
-        tab={DEFAULT_SIDEBAR.defaultTab}
-      >
-        {t("toolBar.library")}
-      </DefaultSidebar.Trigger>
+      {UIOptions.canvasActions.showLibrary && (
+        <DefaultSidebar.Trigger
+          __fallback
+          icon={LibraryIcon}
+          title={capitalizeString(t("toolBar.library"))}
+          onToggle={(open) => {
+            if (open) {
+              trackEvent(
+                "sidebar",
+                `${DEFAULT_SIDEBAR.name} (open)`,
+                `button (${device.isMobile ? "mobile" : "desktop"})`,
+              );
+            }
+          }}
+          tab={DEFAULT_SIDEBAR.defaultTab}
+        >
+          {t("toolBar.library")}
+        </DefaultSidebar.Trigger>
+      )}
       {/* ------------------------------------------------------------------ */}
 
       {appState.isLoading && <LoadingMessage delay={250} />}
@@ -432,6 +432,7 @@ const LayerUI = ({
               actionManager={actionManager}
               showExitZenModeBtn={showExitZenModeBtn}
               renderWelcomeScreen={renderWelcomeScreen}
+              UIOptions={UIOptions}
             />
             {appState.showStats && (
               <Stats
