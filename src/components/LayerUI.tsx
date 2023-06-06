@@ -80,9 +80,7 @@ const DefaultMainMenu: React.FC<{
       {UIOptions.canvasActions.showLoadSceneMenuItem && (
         <MainMenu.DefaultItems.LoadScene />
       )}
-      {UIOptions.canvasActions.showSaveToActiveFileMenuItem && (
         <MainMenu.DefaultItems.SaveToActiveFile />
-      )}
       {/* FIXME we should to test for this inside the item itself */}
       {UIOptions.canvasActions.showExportMenuItem && (
         <MainMenu.DefaultItems.Export />
