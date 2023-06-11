@@ -84,7 +84,7 @@ const DefaultMainMenu: React.FC<{
         <MainMenu.DefaultItems.SaveToActiveFile />
       )}
       {/* FIXME we should to test for this inside the item itself */}
-      {UIOptions.canvasActions.exportOptions && (
+      {UIOptions.canvasActions.showSaveSceneTo && (
         <MainMenu.DefaultItems.Export />
       )}
       {/* FIXME we should to test for this inside the item itself */}
@@ -135,7 +135,7 @@ const LayerUI = ({
   const tunnels = useInitializeTunnels();
 
   const renderJSONExportDialog = () => {
-    if (!UIOptions.canvasActions.exportOptions) {
+    if (!UIOptions.canvasActions.showSaveSceneTo) {
       return null;
     }
 

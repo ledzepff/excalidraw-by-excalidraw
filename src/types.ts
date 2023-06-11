@@ -403,7 +403,7 @@ export type ExportOpts = {
 type CanvasActions = Partial<{
   showChangeViewBackgroundColors: boolean;
   showClearCanvas: boolean;
-  readonly exportOptions: false | ExportOpts;
+  exportOptions: false | ExportOpts;
   loadScene: boolean;
   showSaveSceneTo: boolean;
   showToggleTheme: boolean | null;
